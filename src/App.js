@@ -1,10 +1,20 @@
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom'
+import Login from './components/Login';
 
 function App() {
   return (
-    <div className="App">
-      <h1>COVID-19 Vaccination Tracking Application</h1>
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <Route path='/' component={Login} />
+        </Switch>
+      </div>
+    </Router>
   );
 }
 
