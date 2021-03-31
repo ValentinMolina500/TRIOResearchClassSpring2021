@@ -26,6 +26,10 @@ function Login() {
                 <input {...inputProps}
                 placeholder="Username" />
             </div>
+            <div>
+                <input {...inputProps}
+                placeholder="Password" />
+            </div>
             <button onClick={Login}>Login</button>;
         </div>
     );}
