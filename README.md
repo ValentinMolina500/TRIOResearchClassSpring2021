@@ -1,7 +1,10 @@
-This is project for TRIO. 
-Anabel Cortez
-Valentin Molina
+# COVID-19 Vaccination Tracking Application
 
-Marleny Garzon
+This a project for UNIV199 through TRIO during Spring 2021 at Washington State University Tri-Cities.
 
-Asmita Acharya
+Developers:
+- Valentin Molina
+- Anabel Cortez
+- Marleny Garzon
+- Asmita Acharya
+- Cassandra Hedrick
