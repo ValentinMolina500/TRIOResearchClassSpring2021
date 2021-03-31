@@ -8,7 +8,8 @@ function Login() {
             <div className ="Title"> 
                 <h2>Login</h2><br /><br />
             </div>
+            <button onClick={Login}>Login</button>;
         </div>
     );}
-    <button onClick={Login}>Login</button>;
+    
 export default Login;
