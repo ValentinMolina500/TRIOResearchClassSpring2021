@@ -7,3 +7,4 @@ Developers:
 - Anabel Cortez
 - Marleny Garzon
 - Asmita Acharya
+- Cassandra Hedrick
