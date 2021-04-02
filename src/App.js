@@ -5,12 +5,14 @@ import {
   Route,
 } from 'react-router-dom'
 import Login from './components/Login';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Switch>
+          <Route path="/dashboard" component={Dashboard} />
           <Route path='/' component={Login} />
         </Switch>
       </div>
