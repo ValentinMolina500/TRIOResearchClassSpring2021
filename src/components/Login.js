@@ -1,6 +1,5 @@
 import React,{useState} from 'react';
 
-
 function useInput(defaultValue){
     const [value, setValue]= useState(defaultValue);
 
@@ -19,7 +18,7 @@ function Login() {
     return (
         <div className="Login">
             <h1>COVID-19 Vaccination Tracking Application</h1>
-            <div className ="Title"> 
+            <div className ="Title">
                 <h2>Login</h2><br /><br />
             </div>
             <div>
@@ -33,5 +32,5 @@ function Login() {
             <button onClick={Login}>Login</button>;
         </div>
     );}
-    
+
 export default Login;

@@ -1,10 +1,8 @@
 import React from 'react';
 
-import './Dashboard.css';
-
 function Dashboard() {
     return (
-        <div className="Dashboard">
+        <div className="Dashboard main-page">
             <main className="main-container">
                 <h1 className="greeting black">Welcome back Luis!</h1>
                 <section className="action-card-container">

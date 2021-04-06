@@ -13,3 +13,6 @@ class Authentication {
         return Firebase.signOut();
     }
 }
+
+const instance = new Authentication();
+export default instance;
