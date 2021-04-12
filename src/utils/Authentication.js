@@ -15,4 +15,5 @@ class Authentication {
 }
 
 const instance = new Authentication();
+
 export default instance;

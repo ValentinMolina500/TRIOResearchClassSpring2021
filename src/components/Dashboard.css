@@ -37,10 +37,12 @@
     align-items: center;
     justify-content: center;
 }
+
 .Dashboard .action-card-wrapper:not(:last-child)
 {
     margin-right: 2rem;
 }
+
 .Dashboard .action-card-wrapper:hover
 {
     bottom: 1rem;
