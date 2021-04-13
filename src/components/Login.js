@@ -1,5 +1,9 @@
 import React,{useState} from 'react';
 
+import {
+  Heading
+} from "@chakra-ui/react";
+
 function useInput(defaultValue){
     const [value, setValue]= useState(defaultValue);
 
@@ -17,7 +21,7 @@ function Login() {
 
     return (
         <div className="Login">
-            <h1>COVID-19 Vaccination Tracking Application</h1>
+            <Heading>COVID-19 Vaccination Tracking Application</Heading>
             <div className ="Title">
                 <h2>Login</h2><br /><br />
             </div>
