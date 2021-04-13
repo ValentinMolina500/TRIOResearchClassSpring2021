@@ -8,3 +8,5 @@ Developers:
 - Marleny Garzon
 - Asmita Acharya
 - Cassandra Hedrick
+
+This is an example sentence.

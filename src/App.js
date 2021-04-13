@@ -7,6 +7,7 @@ import {
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 
+/* This is a useless comment */
 function App() {
   return (
     <Router>
