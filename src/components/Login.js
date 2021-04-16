@@ -22,22 +22,22 @@ export default function Login() {
       <Box>
         <Box p={2}>
           <Box textAlign="center">
-            <Heading>Vaccination Tracking App</Heading>
+            <Heading color="red.200">Vaccination Tracking App</Heading>
           </Box>
           <Box my={4} textAlign="left">
             <form>
               <FormControl>
-                <FormLabel>Email</FormLabel>
+                <FormLabel color="red.600">Email</FormLabel>
                 <Input type="email" placeholder="test@login.com" />
               </FormControl>
               <FormControl mt={6}>
-                <FormLabel>Password</FormLabel>
+                <FormLabel color="red.600">Password</FormLabel>
                 <Input type="password" placeholder="*******" />
               </FormControl>
-              <Button width="full" mt={4} type="submit">
+              <Button width="full" mt={4} type="submit" colorScheme="red" variant="solid">
                 LogIn
               </Button>
-              <Button onClick={onButtonClick} width="full" mt={4} type="submit">
+              <Button onClick={onButtonClick} width="full" mt={4} type="submit"color="red.600">
                 Sign Up
               </Button>
             </form>
