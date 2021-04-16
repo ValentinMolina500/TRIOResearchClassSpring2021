@@ -8,7 +8,8 @@ import {
     Flex,
     FormControl,
     FormLabel,
-    Button
+    Button,
+    ButtonGroup
 } from "@chakra-ui/react";
 
 
@@ -42,11 +43,11 @@ function SignUp() {
                   <FormLabel color="teal.600">Email</FormLabel>
                   <Input value={email} onChange={e=> setEmail(e.target.value)} placeholder="email@signup.com"/>
                   </FormControl>
-                  <Button width="full" mt={4} type="submit">
-                submit
+                  <Button width="full" mt={4} type="submit" colorScheme="teal" variant="solid">
+                Submit
                  </Button>
               <Button onClick={onButtonClick} width="full" mt={4} type="submit" color="teal.600">
-              back to Login
+              Back to Login
               </Button> 
           </form>
           </Box>
