@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom'
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import Signup from './components/Signup';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Switch>
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/' component={Login} />
+          <Route path='/testing' component={Signup}/>
         </Switch>
       </div>
     </Router>
