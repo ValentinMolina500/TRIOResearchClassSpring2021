@@ -1,4 +1,6 @@
-import React from "react";
+/*import React from "react";*/
+import React, { useState } from "react";
+import { useHistory } from 'react-router-dom';
 import {
   Flex,
   Box,
@@ -9,13 +11,18 @@ import {
   Button,
 } from "@chakra-ui/react";
 
+
 export default function Login() {
+  const history = useHistory();
+  const onButtonClick = () => {
+    history.push("/SignUp");
+  }
   return (
     <Flex width="100vw" height="100vh" align="center" justifyContent="center">
       <Box>
         <Box p={2}>
           <Box textAlign="center">
-            <Heading>Login</Heading>
+            <Heading>Vaccination Tracking App</Heading>
           </Box>
           <Box my={4} textAlign="left">
             <form>
@@ -29,6 +36,9 @@ export default function Login() {
               </FormControl>
               <Button width="full" mt={4} type="submit">
                 LogIn
+              </Button>
+              <Button onClick={onButtonClick} width="full" mt={4} type="submit">
+                Sign Up
               </Button>
             </form>
           </Box>
