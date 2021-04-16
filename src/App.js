@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom'
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
-import Signup from './components/Signup';
+import SignUp from "./components/SignUp";
 
 function App() {
   return (
@@ -14,8 +14,8 @@ function App() {
       <div className="App">
         <Switch>
           <Route path='/dashboard' component={Dashboard} />
+          <Route path='/signup' component={SignUp}/>
           <Route path='/' component={Login} />
-          <Route path='/testing' component={Signup}/>
         </Switch>
       </div>
     </Router>
