@@ -10,26 +10,27 @@ import {
 
 import { PlusSquareIcon, ViewIcon } from '@chakra-ui/icons';
 import QRCodeIcon from "../icons/QRCodeIcon";
+import { useHistory } from 'react-router-dom';
 
 const DASHBOARD_ITEMS = [
   {
     name: "Create New Form",
-    icon: PlusSquareIcon 
-
+    icon: PlusSquareIcon, 
   },
   {
     name: "View Forms",
-    icon: ViewIcon
+    icon: ViewIcon,
+   
   },
   {
     name: "View QR Code",
-    icon: QRCodeIcon
-
+    icon: QRCodeIcon,
   }
 ];
 
 function Dashboard() {
-
+  const history = useHistory();
+  
     const renderDashboardItems = () => {
       return DASHBOARD_ITEMS.map((item, i) => {
         const Icon = item.icon;
@@ -46,6 +47,7 @@ function Dashboard() {
             justifyContent="center"
             alignItems="center"
             flexDirection="column"
+            onClick={() => history.push("/create-form")}
           >
             <Box mb="1rem" color="teal.500">
               <Icon  boxSize="2rem" />

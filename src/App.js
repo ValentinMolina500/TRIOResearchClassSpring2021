@@ -12,6 +12,7 @@ import {
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import SignUp from "./components/SignUp";
+import CreateForm from './components/CreateForm';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Switch>
           <Route path='/dashboard' component={Dashboard} />
           <Route path='/signup' component={SignUp}/>
+          <Route path='/create-form' component={CreateForm} />
           <Route path='/' component={Login} />
         </Switch>
       </Box>
