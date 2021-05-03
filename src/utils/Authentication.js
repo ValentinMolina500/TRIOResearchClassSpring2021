@@ -1,37 +1,86 @@
-import Firebase from './Firebase';
+import Firebase from "./Firebase";
 
 class Authentication {
+  /* Current user reference */
+  authInfo = {
+    currentUser: null,
+    newUser: false,
+    userInfo: null,
+  };
 
-	/* Current user reference */
-	currentUser = null;
+  authStateObservers = [];
 
-	authStateObservers = [];
+  /* Log in user with email and password */
+  login = async (email, password) => {
+    try {
+      const result = await Firebase.login(email, password);
+      console.log(result);
+      const { currentUser, userInfo } = result;
 
-    /* String String -> Promise */
-    /* Log in user with email and password */
-    login = (email, password) => {
-        return Firebase.login(email, password);
+      this.authInfo = {
+        ...this.authInfo,
+        currentUser,
+        userInfo,
+      };
+
+      /* Notify observers */
+      this._onAuthStateChanged();
+    } catch (e) {
+      return Promise.reject(e);
     }
+  };
 
-    /* Sign out user from session */
-    signOut = () => {
-        return Firebase.signOut();
-    }
+  /* Sign out user from session */
+  signOut = () => {
+    return Firebase.signOut();
+  };
 
-    authStateListener = (cb) => {
-    	this.authStateObservers.push(cb);
-    }
+  signUp = async (email, password, userInfo) => {
+    await Firebase.signUp(email, password, userInfo);
 
-    onAuthStateChanged = () => {
-    	this.authStateObservers.forEach((callback) => {
-    		callback(this.currentUser);
-    	});
-    }
+    /* Set local auth info */
+    this.authInfo.currentUser = Firebase.getCurrentUser();
+    this.authInfo.userInfo = {
+      ...userInfo,
+      uid: this.authInfo.currentUser.uid,
+    };
+    this.authInfo.newUser = true;
+
+    this._onAuthStateChanged();
+  };
+
+  onAuthStateChanged = (cb) => {
+    this.authStateObservers.push(cb);
+  };
+
+  _onAuthStateChanged = () => {
+    this.authStateObservers.forEach((callback) => {
+      callback(this.authInfo);
+    });
+  };
+
+  isLoggedIn = () => {
+    return this.authInfo.currentUser !== null;
+  };
+
+  getCurrentUser = () => {
+    return this.authInfo.userInfo;
+  };
+
+  logout = async () => {
+    await Firebase.logout();
+
+    this.authInfo = {
+      currentUser: null,
+      newUser: false,
+      userInfo: null,
+    };
+  };
 }
 
 export const UserRole = {
-	REGULAR: "REGULAR",
-	ADMIN: "ADMIN"
+  REGULAR: "REGULAR",
+  ADMIN: "ADMIN",
 };
 
 const instance = new Authentication();

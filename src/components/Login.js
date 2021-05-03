@@ -9,13 +9,32 @@ import {
   FormLabel,
   Input,
   Button,
+  Text
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
 
+import Authentication from "../utils/Authentication";
 
 export default function Login() {
+  const { register, handleSubmit } = useForm();
+
   const history = useHistory();
-  const onButtonClick = () => {
-    history.push("/SignUp");
+  const [loginError, setLoginError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onLogin = async (data) => {
+   
+
+    try {
+      setIsLoading(true);
+      await Authentication.login(data.email, data.password);
+      history.push("/dashboard");
+    } catch (e) {
+      console.error(e);
+      setLoginError(true);
+    } finally {
+      setIsLoading(false);
+    }
   }
   return (
     <Flex width="100vw" height="100vh" align="center" justifyContent="center">
@@ -25,19 +44,20 @@ export default function Login() {
             <Heading color="red.200">Vaccination Tracking App</Heading>
           </Box>
           <Box my={4} textAlign="left">
-            <form>
-              <FormControl>
+            <form onSubmit={handleSubmit(onLogin)}>
+              <FormControl id="email" isRequired>
                 <FormLabel color="red.600">Email</FormLabel>
-                <Input type="email" placeholder="test@login.com" />
+                <Input type="email" placeholder="test@login.com" {...register("email", { required: true })}/>
               </FormControl>
-              <FormControl mt={6}>
+              <FormControl mt={6} id="password" isRequired>
                 <FormLabel color="red.600">Password</FormLabel>
-                <Input type="password" placeholder="*******" />
+                <Input type="password" placeholder="*******" {...register("password", { required: true })}/>
               </FormControl>
-              <Button width="full" mt={4} type="submit" colorScheme="red" variant="solid">
+              {loginError && <Text color="red.500">Invalid credentials</Text>}
+              <Button width="100%" isLoading={isLoading} mt={4} type="submit" colorScheme="red" variant="solid">
                 LogIn
               </Button>
-              <Button onClick={onButtonClick} width="full" mt={4} type="submit"color="red.600">
+              <Button disabled={isLoading} onClick={() => history.push("/SignUp")} width="full" mt={4} type="submit"color="red.600">
                 Sign Up
               </Button>
             </form>
