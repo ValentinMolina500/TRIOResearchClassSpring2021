@@ -1,0 +1,7 @@
+REACT_APP_API_KEY=AIzaSyDvBD0iBHcH2tXo2LBTsXcqLwxO6DuVsZ4
+REACT_APP_AUTH_DOMAIN=vaccinationproof.firebaseapp.com
+REACT_APP_DATABASE_URL=https://vaccinationproof-default-rtdb.firebaseio.com
+REACT_APP_PROJECT_ID=vaccinationproof
+REACT_APP_STORAGE_BUCKET=vaccinationproof.appspot.com
+REACT_APP_MESSAGING_SENDER_ID=630163141683
+REACT_APP_APP_ID=1:630163141683:web:0023b981838bd597d2df46
