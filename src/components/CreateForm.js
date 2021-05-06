@@ -20,7 +20,7 @@ import { useHistory } from 'react-router-dom';
 
 import Authentication from "../utils/Authentication";
 import Firebase from "../utils/Firebase";
-import Globals from "../utils/Globals";
+import Globals, { Status } from "../utils/Globals";
 
 function CreateForm() {
  
@@ -39,7 +39,10 @@ function CreateForm() {
       lastName: data.lastName.trim(),
       patientNumber: data.patientNumber.trim(),
       dateOfBirth: time,
-      file: data.fileUpload
+      file: data.fileUpload,
+      status: Status.NEEDS_REVIEW,
+      email: user.email,
+      ownerId: user.uid,
     }
 
     setIsSubmitting(true);
@@ -76,7 +79,8 @@ function CreateForm() {
     <Center h="100vh" w="100vw"  bg="#F2F5F9">
 
       <Box w="100%" maxW="35rem" mx="2rem" bg="white" padding="2rem" borderRadius="lg" boxShadow="md">
-          <Heading mb="1.5rem" size="lg">Create Form</Heading>
+          <Heading  size="lg">Create Form</Heading>
+          <Text color="gray.500" mb="1.5rem">Input information from COVID-19 Vaccination Record Card</Text>
           <form onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing="1.5rem"> 
             <FormControl id="lastName" isRequired  isInvalid={errors.lastName}>

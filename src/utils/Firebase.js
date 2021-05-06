@@ -3,6 +3,7 @@ import 'firebase/database';
 import 'firebase/auth';
 import 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid';
+import { UserRole } from './Authentication';
 
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -52,7 +53,7 @@ class Firebase {
       const user = userCredential.user;
       
       /* Add user info into database */
-      await this.db.ref(`/users/${user.uid}`).set({ ...userInfo, uid: user.uid, vaccinated: false });
+      await this.db.ref(`/users/${user.uid}`).set({ ...userInfo, uid: user.uid, vaccinated: false, role: UserRole.REGULAR });
     }
 
     getCurrentUser = () => {
@@ -72,10 +73,11 @@ class Firebase {
         const timestamp = new Date().getTime();
         const { file, ...other } = form;
 
-        const result = await this.db.ref(`/forms/`).push({ ...other, image: url, timestamp, uid });
+        const result = await this.db.ref(`/forms/`).push({ ...other, image: url, timestamp, uid, updatedAt: timestamp });
 
         console.log(result);
         /* Add key to users list of forms */   
+        await this.db.ref(`/forms/${result.key}/key`).set(result.key);
         await this.db.ref(`/users/${uid}/forms/`).push({ key: result.key });
 
         console.log(result);
@@ -103,6 +105,34 @@ class Firebase {
 
     getFormById = (id) => {
       return this.db.ref(`/forms/${id}`).once('value');
+    }
+
+    getAllForms = async () => {
+      const formObj = await this.db.ref(`/forms/`).once('value');
+     
+      if (!formObj.val()) {
+        return [];
+      }
+     
+      const forms = Object.keys(formObj.val()).map(key => {
+        return { ...formObj.val()[key], key }
+      });
+     
+      console.log(forms);
+      return forms.reverse();
+    }
+
+    updateFormStatus =  (status, formId) => {
+      const updatedAt = new Date().getTime();
+      let updates = {};
+      updates[`/forms/${formId}/status`] = status;
+      updates[`/forms/${formId}/updatedAt`] = updatedAt;
+
+      return this.db.ref().update(updates);
+    }
+
+    getUserById = (id) => {
+      return this.db.ref(`/users/${id}`).once('value');
     }
 }
 

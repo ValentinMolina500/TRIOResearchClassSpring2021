@@ -11,6 +11,11 @@ import {
   FormLabel,
   Button,
   Stack,
+  Alert,
+  AlertIcon,
+  AlertDescription,
+  CloseButton,
+  AlertTitle,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
@@ -18,11 +23,8 @@ import Authentication from "../utils/Authentication";
 
 function SignUp() {
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-  } = useForm();
+  const [hasError, setHasError] = useState(false);
+  const { register, handleSubmit } = useForm();
 
   const history = useHistory();
 
@@ -34,19 +36,19 @@ function SignUp() {
     const userInfo = {
       firstName: data.firstName.trim(),
       lastName: data.lastName.trim(),
-      email: data.email.trim()
+      email: data.email.trim(),
     };
 
     try {
       setIsSubmitting(true);
       await Authentication.signUp(data.email, data.password, userInfo);
+      history.push("/dashboard");
     } catch (e) {
       /* Handle errors */
+      setHasError(true);
     } finally {
       setIsSubmitting(false);
     }
-
-    history.push("/dashboard")
   };
 
   return (
@@ -56,6 +58,13 @@ function SignUp() {
           <Heading color="teal.200">Vaccination Tracking Sign Up Page</Heading>
         </Box>
         <Box my={4} textAlign="left">
+          {hasError && (
+            <Alert mb="1rem" status="error">
+              <AlertIcon />
+              <AlertTitle mr={2}>Error creating account!</AlertTitle>
+              <AlertDescription>Email already in use.</AlertDescription>
+            </Alert>
+          )}
           <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing="1.5rem">
               <FormControl id="firstName" isRequired>
@@ -64,7 +73,7 @@ function SignUp() {
                 </FormLabel>
                 <Input
                   placeholder="First Name"
-                  {...register("firstName", { required: true } )}
+                  {...register("firstName", { required: true })}
                 />
               </FormControl>
 
@@ -74,24 +83,28 @@ function SignUp() {
                 </FormLabel>
                 <Input
                   placeholder="Last Name"
-                  {...register("lastName", { required: true } )}
+                  {...register("lastName", { required: true })}
                 />
               </FormControl>
 
               <FormControl id="email" isRequired>
-                <FormLabel htmlFor="email" color="teal.600">Email</FormLabel>
+                <FormLabel htmlFor="email" color="teal.600">
+                  Email
+                </FormLabel>
                 <Input
                   placeholder="email@signup.com"
-                  {...register("email", { required: true } )}
+                  {...register("email", { required: true })}
                 />
               </FormControl>
 
               <FormControl id="password" isRequired>
-                <FormLabel htmlFor="password" color="teal.600">Password</FormLabel>
+                <FormLabel htmlFor="password" color="teal.600">
+                  Password
+                </FormLabel>
                 <Input
                   type="password"
                   placeholder="*******"
-                  {...register("password", { required: true } )}
+                  {...register("password", { required: true })}
                 />
               </FormControl>
 

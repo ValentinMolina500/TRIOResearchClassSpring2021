@@ -11,14 +11,16 @@ import {
   Heading,
   Box,
   Button,
+  Flex,
   Tooltip
 } from "@chakra-ui/react"
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { useForm } from "react-hook-form";
 import { useHistory } from 'react-router-dom';
-
+import { ArrowForwardIcon } from "@chakra-ui/icons";
 import Authentication from "../utils/Authentication";
 import Firebase from "../utils/Firebase";
+import { Status } from '../utils/Globals';
 
 const formatDate = (date) => {
 	var hours = date.getHours();
@@ -45,14 +47,31 @@ const ViewForms = () => {
 		}
 
 		init();
-	}, []);
+  }, [user.uid]);
+  
+  const renderStatus = (status) => {
+    switch (status) {
+      case Status.NEEDS_REVIEW:
+        return <Badge colorScheme="yellow">Needs Review</Badge>
+        
+      case Status.REJECT:
+        return <Badge colorScheme="red">Rejected</Badge>
+
+      case Status.VALID:
+        return <Badge colorScheme="green">Verified</Badge>
+      
+      default: 
+        return <Badge>Unknown</Badge>
+    }
+  }
 
 	const renderForms = () => {
 		return forms.map((form, i) => {
 			return (
 				<Tr key={i}>
 					<Td>{formatDate(new Date(form.timestamp))}</Td>
-					<Td><Tooltip hasArrow label="This form will be reviewed for validity" placement="top"><Badge colorScheme="yellow">Needs Review</Badge></Tooltip></Td>
+          <Td>{formatDate(new Date(form.updatedAt))}</Td>
+					<Td>{renderStatus(form.status)}</Td>
 					<Td>
             <Button 
               size="sm" 
@@ -70,7 +89,10 @@ const ViewForms = () => {
 
 	return (
 		<Box bg="#F2F5F9" minH="100vh" py="2rem" >
-			<Heading mx="2rem" mb="2rem" size="lg">View Forms</Heading>
+			<Flex justifyContent="space-between" mx="2rem" mb="2rem" alignItems="center">
+      <Heading size="lg">View Forms</Heading>
+      <Button onClick={() => history.push('/dashboard')} colorScheme="teal" leftIcon={<ArrowForwardIcon />}>Go Back</Button>
+      </Flex>
 			
 			<Box mx="2rem">
 			
@@ -78,7 +100,9 @@ const ViewForms = () => {
 				  <Thead>
 				    <Tr>
 				      <Th>Date Submitted</Th>
+              <Th>Updated At</Th>
 				      <Th>Status</Th>
+              
 				      <Th>Action</Th>
 				    </Tr>
 				  </Thead>

@@ -32,8 +32,6 @@ function Dashboard() {
   },
 ];
   const renderDashboardItems = () => {
-
-    
     return DASHBOARD_ITEMS.map((item, i) => {
       const Icon = item.icon;
 
@@ -74,6 +72,9 @@ function Dashboard() {
     history.push("/login");
   }
 
+  const renderVacStatus = (userData) => {
+    return userData.vaccinated ? <Badge ml="0.5rem" colorScheme="green">vaccinated</Badge> : <Badge ml="0.5rem" colorScheme="red">not vaccinated</Badge>
+  }
   return (
     <Center bg="#F2F5F9" minH="100vh" w="100vw">
       <Box>
@@ -95,7 +96,7 @@ function Dashboard() {
                 Your vaccination status is 
               </Heading>
 
-              <Badge ml="0.5rem" colorScheme="red">not vaccinated</Badge>
+              {renderVacStatus(user)}
             </Flex>
           </Box>
 

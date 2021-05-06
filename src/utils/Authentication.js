@@ -43,6 +43,7 @@ class Authentication {
     this.authInfo.userInfo = {
       ...userInfo,
       uid: this.authInfo.currentUser.uid,
+      role: UserRole.REGULAR
     };
     this.authInfo.newUser = true;
 

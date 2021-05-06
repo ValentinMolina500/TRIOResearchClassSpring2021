@@ -9,7 +9,8 @@ import {
   FormLabel,
   Input,
   Button,
-  Text
+  Text,
+  ScaleFade
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
 
@@ -37,6 +38,7 @@ export default function Login() {
     }
   }
   return (
+    <ScaleFade in={true} initialScale={0.9}>
     <Flex width="100vw" height="100vh" align="center" justifyContent="center">
       <Box>
         <Box p={2}>
@@ -65,5 +67,6 @@ export default function Login() {
         </Box>
       </Box>
     </Flex>
+    </ScaleFade>
   );
 }
